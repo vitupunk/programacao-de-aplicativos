@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Notas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eef2f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 350px;
+        }
+        .logo {
+            width: 100px;
+            margin-bottom: 1rem;
+            border-radius: 50%;
+        }
+        h2 { color: #333; margin-bottom: 1.5rem; }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        button:hover { background-color: #357ABD; }
+        
+        #resultado-area {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        .aprovado { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .reprovado { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        
+        .info { font-size: 18px; margin: 5px 0; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <img src="https://cdn-icons-png.flaticon.com/512/3413/3413535.png" alt="Logo Escola" class="logo">
+    
+    <h2>Cálculo de Média</h2>
+    
+    <input type="number" id="nota1" placeholder="Nota 1" min="0" max="10">
+    <input type="number" id="nota2" placeholder="Nota 2" min="0" max="10">
+    <input type="number" id="nota3" placeholder="Nota 3" min="0" max="10">
+    
+    <button onclick="calcularMedia()">Verificar Situação</button>
+
+    <div id="resultado-area">
+        <div class="info">Média: <strong id="resMedia"></strong></div>
+        <div class="info">Status: <strong id="resStatus"></strong></div>
+    </div>
+</div>
+
+<script>
+    function calcularMedia() {
+        const n1 = parseFloat(document.getElementById('nota1').value);
+        const n2 = parseFloat(document.getElementById('nota2').value);
+        const n3 = parseFloat(document.getElementById('nota3').value);
+        const area = document.getElementById('resultado-area');
+
+        if (isNaN(n1) || isNaN(n2) || isNaN(n3)) {
+            alert("Por favor, preencha as três notas.");
+            return;
+        }
+
+        const media = (n1 + n2 + n3) / 3;
+        const status = media >= 7 ? "APROVADO" : "REPROVADO";
+
+        // Atualiza os textos
+        document.getElementById('resMedia').innerText = media.toFixed(1);
+        document.getElementById('resStatus').innerText = status;
+
+        // Aplica a cor baseada no status
+        area.className = status === "APROVADO" ? "aprovado" : "reprovado";
+        area.style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
