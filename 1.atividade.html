@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Simples</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 320px;
+        }
+        .logo {
+            width: 80px;
+            margin-bottom: 1rem;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #resultados {
+            margin-top: 20px;
+            text-align: left;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            display: none; /* Escondido até calcular */
+        }
+        .resultado-linha {
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+        strong {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="https://via.placeholder.com/80" alt="Logotipo" class="logo">
+    
+    <h2>Cálculos Rápidos</h2>
+    
+    <input type="number" id="num1" placeholder="Digite o 1º número">
+    <input type="number" id="num2" placeholder="Digite o 2º número">
+    
+    <button onclick="calcular()">Calcular</button>
+
+    <div id="resultados">
+        <div class="resultado-linha">Média: <strong id="resMedia"></strong></div>
+        <div class="resultado-linha">Soma: <strong id="resSoma"></strong></div>
+        <div class="resultado-linha">Produto: <strong id="resProduto"></strong></div>
+        <div class="resultado-linha">Maior: <strong id="resMaior"></strong></div>
+        <div class="resultado-linha">Menor: <strong id="resMenor"></strong></div>
+    </div>
+</div>
+
+<script>
+    function calcular() {
+        const n1 = parseFloat(document.getElementById('num1').value);
+        const n2 = parseFloat(document.getElementById('num2').value);
+
+        if (isNaN(n1) || isNaN(n2)) {
+            alert("Por favor, preencha os dois campos com números.");
+            return;
+        }
+
+        // Cálculos
+        const soma = n1 + n2;
+        const media = soma / 2;
+        const produto = n1 * n2;
+        const maior = Math.max(n1, n2);
+        const menor = Math.min(n1, n2);
+
+        // Exibir resultados
+        document.getElementById('resMedia').innerText = media;
+        document.getElementById('resSoma').innerText = soma;
+        document.getElementById('resProduto').innerText = produto;
+        document.getElementById('resMaior').innerText = maior;
+        document.getElementById('resMenor').innerText = menor;
+
+        // Mostrar a div de resultados
+        document.getElementById('resultados').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
